@@ -1,0 +1,18 @@
+{
+  "experiment": "dense_block_causal",
+  "representation": "dense",
+  "attention": "block_causal",
+  "encoder": "dinov2_vits14",
+  "seeds": 8,
+  "train_samples": 4096,
+  "val_samples": 1024,
+  "epochs": 18,
+  "batch_size": 32,
+  "learning_rate": 0.0003,
+  "weight_decay": 0.0001,
+  "context_frames": 2,
+  "embedding_dim": 256,
+  "layers": 4,
+  "heads": 4,
+  "success_threshold": 0.12
+}

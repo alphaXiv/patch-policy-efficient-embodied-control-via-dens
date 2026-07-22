@@ -1,0 +1,30 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: patch-policy-{{ORX_RUN}}
+spec:
+  backoffLimit: 0
+  activeDeadlineSeconds: 14400
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: run
+          image: pytorch/pytorch:2.6.0-cuda12.4-cudnn9-runtime
+          command: ["bash", "-c", "$ORX_SCRIPT"]
+          env:
+            - name: PYTHONUNBUFFERED
+              value: "1"
+            - name: HF_HOME
+              value: /tmp/huggingface
+            - name: TORCH_HOME
+              value: /tmp/torch
+          resources:
+            requests:
+              nvidia.com/gpu: "8"
+              cpu: "32"
+              memory: 128Gi
+            limits:
+              nvidia.com/gpu: "8"
+              cpu: "64"
+              memory: 256Gi
