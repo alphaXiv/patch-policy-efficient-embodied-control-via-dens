@@ -105,6 +105,13 @@ class DinoPatchEncoder(nn.Module):
 
 
 def prepare_encoder(requested: str) -> tuple[str, str | None]:
+    if requested == "dinov2_vits14_random":
+        # Exercise the identical ViT architecture without learned visual
+        # features. Each experiment seed also samples an encoder seed, making
+        # the aggregate a robust random-feature control.
+        model = DinoPatchEncoder(pretrained=False)
+        del model
+        return "dinov2_vits14_random", None
     if requested != "dinov2_vits14":
         return "frozen_patch_projection", None
     try:
@@ -118,6 +125,8 @@ def prepare_encoder(requested: str) -> tuple[str, str | None]:
 def make_encoder(resolved: str, device: torch.device) -> nn.Module:
     if resolved == "dinov2_vits14_lvd142m":
         return DinoPatchEncoder(pretrained=True).to(device)
+    if resolved == "dinov2_vits14_random":
+        return DinoPatchEncoder(pretrained=False).to(device)
     return FrozenPatchProjection().to(device)
 
 
