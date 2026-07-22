@@ -1,6 +1,6 @@
 {
-  "experiment": "dense_block_causal",
-  "representation": "dense",
+  "experiment": "spatial_2x2_block_causal",
+  "representation": "spatial_2x2",
   "attention": "block_causal",
   "encoder": "dinov2_vits14",
   "seeds": 8,
