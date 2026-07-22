@@ -213,6 +213,9 @@ def run_seed(rank: int, seed: int, cfg: dict[str, Any], resolved_encoder: str, q
         if cfg["representation"] == "global_avg":
             train_features = train_features.mean(dim=2, keepdim=True)
             val_features = val_features.mean(dim=2, keepdim=True)
+        elif cfg["representation"] == "spatial_8x8":
+            train_features = spatial_pool(train_features, output_grid=8)
+            val_features = spatial_pool(val_features, output_grid=8)
         elif cfg["representation"] != "dense":
             raise ValueError(f"unknown representation: {cfg['representation']}")
 
@@ -281,6 +284,17 @@ def evaluate(model: nn.Module, loader: DataLoader, device: torch.device, thresho
         cosine += float(F.cosine_similarity(prediction, target, dim=-1).sum())
         count += len(features)
     return {"mse": squared / (count * 2), "success": success / count, "cosine": cosine / count}
+
+
+def spatial_pool(features: torch.Tensor, output_grid: int) -> torch.Tensor:
+    """Average-pool a square patch grid while preserving coarse layout."""
+    n, context, patches, dim = features.shape
+    input_grid = math.isqrt(patches)
+    if input_grid * input_grid != patches or input_grid % output_grid:
+        raise ValueError(f"cannot pool {patches} patches to {output_grid}x{output_grid}")
+    grid = features.reshape(n * context, input_grid, input_grid, dim).permute(0, 3, 1, 2).float()
+    grid = F.avg_pool2d(grid, kernel_size=input_grid // output_grid, stride=input_grid // output_grid)
+    return grid.permute(0, 2, 3, 1).reshape(n, context, output_grid * output_grid, dim).half()
 
 
 def summarize(cfg: dict[str, Any], resolved: str, fallback_error: str | None, results: list[dict[str, Any]]) -> dict[str, Any]:
