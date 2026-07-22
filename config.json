@@ -1,5 +1,5 @@
 {
-  "experiment": "dense_block_causal_dim64",
+  "experiment": "dense_block_causal_dim32_layer2",
   "representation": "dense",
   "attention": "block_causal",
   "encoder": "dinov2_vits14",
@@ -11,8 +11,8 @@
   "learning_rate": 0.0003,
   "weight_decay": 0.0001,
   "context_frames": 2,
-  "embedding_dim": 64,
-  "layers": 4,
+  "embedding_dim": 32,
+  "layers": 2,
   "heads": 4,
   "success_threshold": 0.12
 }
