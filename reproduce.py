@@ -56,9 +56,6 @@ def render_sequences(n: int, context: int, seed: int) -> tuple[torch.Tensor, tor
             for d in range(3):
                 xy = torch.rand(2, generator=gen) * 0.88 + 0.06
                 _draw_square(canvas, xy, channel=2 if d < 2 else 0, radius=4, value=110)
-            # Low-amplitude texture makes the input less degenerate for a ViT.
-            noise = torch.randint(0, 18, canvas.shape, generator=gen, dtype=torch.uint8)
-            images[i, t] = torch.maximum(canvas, noise)
     return images, actions
 
 
