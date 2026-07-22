@@ -1,6 +1,6 @@
 {
-  "experiment": "dense_block_causal",
-  "representation": "dense",
+  "experiment": "global_avg_block_causal",
+  "representation": "global_avg",
   "attention": "block_causal",
   "encoder": "dinov2_vits14",
   "seeds": 8,
