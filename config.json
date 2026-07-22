@@ -1,7 +1,7 @@
 {
-  "experiment": "dense_block_causal",
+  "experiment": "dense_full_attention",
   "representation": "dense",
-  "attention": "block_causal",
+  "attention": "full",
   "encoder": "dinov2_vits14",
   "seeds": 8,
   "train_samples": 4096,
