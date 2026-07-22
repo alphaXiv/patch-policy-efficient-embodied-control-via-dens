@@ -1,8 +1,8 @@
 {
-  "experiment": "dense_block_causal",
+  "experiment": "frozen_projection_dense_block_causal",
   "representation": "dense",
   "attention": "block_causal",
-  "encoder": "dinov2_vits14",
+  "encoder": "frozen_patch_projection",
   "seeds": 8,
   "train_samples": 4096,
   "val_samples": 1024,
