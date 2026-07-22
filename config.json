@@ -1,7 +1,7 @@
 {
-  "experiment": "dense_block_causal",
+  "experiment": "dense_token_causal",
   "representation": "dense",
-  "attention": "block_causal",
+  "attention": "token_causal",
   "encoder": "dinov2_vits14",
   "seeds": 8,
   "train_samples": 4096,
