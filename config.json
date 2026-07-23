@@ -1,5 +1,5 @@
 {
-  "experiment": "dense_block_causal_train2304_epochs4",
+  "experiment": "dense_block_causal_train2304_epochs4_lr6e4",
   "representation": "dense",
   "attention": "block_causal",
   "encoder": "dinov2_vits14",
@@ -8,7 +8,7 @@
   "val_samples": 1024,
   "epochs": 4,
   "batch_size": 32,
-  "learning_rate": 0.0003,
+  "learning_rate": 0.0006,
   "weight_decay": 0.0001,
   "context_frames": 2,
   "embedding_dim": 256,
