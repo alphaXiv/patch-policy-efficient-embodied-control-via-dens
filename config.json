@@ -1,10 +1,10 @@
 {
-  "experiment": "dense_block_causal",
+  "experiment": "dense_block_causal_train768",
   "representation": "dense",
   "attention": "block_causal",
   "encoder": "dinov2_vits14",
   "seeds": 8,
-  "train_samples": 4096,
+  "train_samples": 768,
   "val_samples": 1024,
   "epochs": 18,
   "batch_size": 32,
